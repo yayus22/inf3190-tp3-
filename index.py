@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import random
 from flask import Flask
 from flask import render_template
 from flask import g
@@ -34,7 +35,24 @@ def close_connection(exception):
         db.disconnect()
 
 
+@app.route('/animal/<int:animal_id>')
+def view_animal(animal_id):
+    data = get_db()
+    animal = data.get_animal(animal_id)
+
+    if animal is None:
+        # You can customize this part to handle the case where the animal is not found
+        return render_template('404.html')
+
+    # Render a template with the details of the specific animal
+    return render_template('animal.html', animal=animal)
+
+
 @app.route('/')
 def form():
+    data = get_db()
+    data_animal = data.get_animaux()
+    # Shuffle the animaux list and select the first 5 elements
+    shuffled_animaux = random.sample(data_animal, min(5, len(data_animal)))
     # À remplacer par le contenu de votre choix.
-    return render_template('form.html')
+    return render_template('accueil.html', animaux=shuffled_animaux)

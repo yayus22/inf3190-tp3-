@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="product-section">
+    <div class="container">
+        {% if animal %}
+            <h2 class="product-title">{{ animal['espece'] }}</h2>
+            <h3 class="product-title">Race: {{ animal['race'] }}</h3>
+            <h3 class="product-title">Adresse: {{ animal['adresse'] }}</h3>
+            <strong class="product-price">Nom: {{ animal['nom'] }}</strong>
+        {% else %}
+            <p>Animal not found</p>
+        {% endif %}
+    </div>
+</div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tiny-slider.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
