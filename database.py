@@ -76,3 +76,11 @@ class Database:
         lastId = cursor.fetchone()[0]
         connection.commit()
         return lastId
+    
+    def get_animaux_by_espece(self, espece):
+        cursor = self.get_connection().cursor()
+        query = ("select id, nom, espece, race, age, description, "
+                 "courriel, adresse, ville, cp from animaux where espece = ?")
+        cursor.execute(query, (espece,))
+        all_data = cursor.fetchall()
+        return [_build_animal(item) for item in all_data]

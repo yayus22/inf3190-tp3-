@@ -14,7 +14,7 @@
 
 import random
 from flask import Flask
-from flask import render_template
+from flask import render_template, request
 from flask import g
 from .database import Database
 
@@ -35,6 +35,21 @@ def close_connection(exception):
         db.disconnect()
 
 
+@app.route('/recherche_animaux', methods=['POST'])
+def recherche_animaux():
+    espece_recherchee = request.form.get('search')
+    data = get_db()
+    # Ajoutez le code pour récupérer les animaux de cette espèce depuis la base de données
+    # Puis, passez ces animaux au modèle pour les afficher sur une autre page
+    animaux_recherches = data.get_animaux_by_espece(espece_recherchee)
+    return render_template('resultats_recherche.html', animaux=animaux_recherches)
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html"), 404
+
+
 @app.route('/animal/<int:animal_id>')
 def view_animal(animal_id):
     data = get_db()
@@ -47,9 +62,30 @@ def view_animal(animal_id):
     # Render a template with the details of the specific animal
     return render_template('animal.html', animal=animal)
 
+@app.route('/liste')
+def liste():
+    data = get_db()
+    data_animal = data.get_animaux()
+    # À remplacer par le contenu de votre choix.
+    return render_template('accueil.html', animaux=data_animal)
+
+@app.route('/form')
+def form():
+    # À remplacer par le contenu de votre choix.
+    return render_template('form.html')
+
+@app.route('/accueil')
+def accueil1():
+    data = get_db()
+    data_animal = data.get_animaux()
+    # Shuffle the animaux list and select the first 5 elements
+    shuffled_animaux = random.sample(data_animal, min(5, len(data_animal)))
+    # À remplacer par le contenu de votre choix.
+    return render_template('accueil.html', animaux=shuffled_animaux)
+
 
 @app.route('/')
-def form():
+def accueil():
     data = get_db()
     data_animal = data.get_animaux()
     # Shuffle the animaux list and select the first 5 elements

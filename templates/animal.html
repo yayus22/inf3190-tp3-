@@ -4,9 +4,14 @@
     <div class="container">
         {% if animal %}
             <h2 class="product-title">{{ animal['espece'] }}</h2>
+            <h2><strong class="product-price">Nom: {{ animal['nom'] }}</strong></h2>
             <h3 class="product-title">Race: {{ animal['race'] }}</h3>
+            <h3 class="product-title">Age: {{ animal['age'] }} ans</h3>
             <h3 class="product-title">Adresse: {{ animal['adresse'] }}</h3>
-            <strong class="product-price">Nom: {{ animal['nom'] }}</strong>
+            <h3 class="product-title">Ville: {{ animal['ville'] }}</h3>
+            <h3 class="product-title">Code Postal: {{ animal['cp'] }}</h3>
+            <h4 class="product-title"><a href="mailto:{{ animal['courriel'] }}">Courriel: {{ animal['courriel'] }}</a></h4>
+            <p class="product-title">Description: {{ animal['description'] }}</p>
         {% else %}
             <p>Animal not found</p>
         {% endif %}
