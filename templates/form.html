@@ -1,31 +1,31 @@
 {% extends "layout.html"%}
-{% block content%}
-    <form>
+{% block content %}
+    <form action="/ajouter_animal" id="search-form" method="POST">
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label class="text-black" for="fname">Nom </label>
-                    <input type="text" class="form-control" id="fname" required>
+                    <label class="text-black" for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" value="{{ nom }}" required>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label class="text-black" for="lname">Espece</label>
-                    <input type="text" class="form-control" id="lname" required>
+                    <label class="text-black" for="espece">Espece</label>
+                    <input type="text" class="form-control" id="espece" name="espece" value="{{ espece }}" required>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label class="text-black" for="fname">Race</label>
-                    <input type="text" class="form-control" id="race" required>
+                    <label class="text-black" for="race">Race</label>
+                    <input type="text" class="form-control" id="race" name="race" value="{{ race }}" required>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label class="text-black" for="lname">Age</label>
-                    <input type="number" class="form-control" id="age" required>
+                    <label class="text-black" for="age">Age</label>
+                    <input type="number" class="form-control" id="age" name="age" value="{{ age }}" required>
                 </div>
             </div>
         </div>
@@ -33,35 +33,38 @@
             <div class="col-6">
                 <div class="form-group">
                     <label class="text-black" for="email">Email Adresse</label>
-                    <input type="email" class="form-control" id="email" required>
+                    <input type="email" class="form-control" id="courriel" name="courriel" value="{{ courriel }}" required>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label class="text-black" for="fname">Adresse civique </label>
-                    <input type="text" class="form-control" id="ac" required>
+                    <label class="text-black" for="adresse">Adresse civique </label>
+                    <input type="text" class="form-control" id="adresse" name="adresse" value="{{ adresse }}" required>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label class="text-black" for="email">Code postal</label>
-                    <input type="text" class="form-control" id="cp" required>
+                    <label class="text-black" for="cp">Code postal</label>
+                    <input type="text" class="form-control" id="cp" name="cp" value="{{ cp }}" required>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label class="text-black" for="lname">Ville</label>
-                    <input type="text" class="form-control" id="ville" required>
+                    <label class="text-black" for="ville">Ville</label>
+                    <input type="text" class="form-control" id="ville" name="ville" value="{{ ville }}" required>
                 </div>
             </div>
         </div>
         <div class="form-group mb-5">
-            <label class="text-black" for="message">Description</label>
-            <textarea name="" class="form-control" id="message" cols="30" rows="5" required></textarea>
+            <label class="text-black" for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" cols="30" rows="5" value="{{ description }}" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary-hover-outline" id="submit_btn">Send Message</button>
+        <p id="msg_err"></p>
+
+        <input type="submit" class="btn btn-primary-hover-outline" id="submit_btn">
     </form>
 {% endblock %}
+<script src="js/script.js"></script>

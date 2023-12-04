@@ -77,10 +77,17 @@ class Database:
         connection.commit()
         return lastId
     
-    def get_animaux_by_espece(self, espece):
+    def search_animaux(self, query):
         cursor = self.get_connection().cursor()
-        query = ("select id, nom, espece, race, age, description, "
-                 "courriel, adresse, ville, cp from animaux where espece = ?")
-        cursor.execute(query, (espece,))
+        search_query = (
+            "SELECT id, nom, espece, race, age, description, "
+            "courriel, adresse, ville, cp FROM animaux WHERE "
+            "espece LIKE ? OR "
+            "nom LIKE ? OR "
+            "race LIKE ? OR "
+            "description LIKE ?"
+        )
+        cursor.execute(search_query, ('%' + query + '%',) * 4)  # Utilisation de LIKE pour les correspondances partielles
         all_data = cursor.fetchall()
         return [_build_animal(item) for item in all_data]
+
