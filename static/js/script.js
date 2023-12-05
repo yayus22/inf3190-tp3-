@@ -4,10 +4,10 @@ var messageErreur = document.getElementById("msg_err");
 var nomA = document.getElementById("nom")
 nomA.addEventListener("input", function() {
     var nom = document.getElementById("nom").value
-    if(nom.includes(',')){
+    if(nom.includes(',') || nom.length < 3 || nom.length > 20){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
-        messageErreur.textContent = "ATTENTION ! Le nom contient une virgule.";
+        messageErreur.textContent = "ATTENTION ! Le nom est invalide.";
         fname.disabled = nom.includes(',');
     }else{
         messageErreur.style.display = "none";
@@ -17,57 +17,57 @@ nomA.addEventListener("input", function() {
 
 var especeA = document.getElementById("espece")
 especeA.addEventListener("input", function() {
-    var nom = document.getElementById("espece").value
-    if(nom.includes(',')){
+    var espece = document.getElementById("espece").value
+    if(espece.includes(',')){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
         messageErreur.textContent = "ATTENTION ! L'espece contient une virgule.";
-        fname.disabled = nom.includes(',');
+        fname.disabled = espece.includes(',');
     }else{
         messageErreur.style.display = "none";
-        fname.disabled = nom.includes(',');
+        fname.disabled = espece.includes(',');
     }
 });
 
 var raceA = document.getElementById("race")
 raceA.addEventListener("input", function() {
-    var nom = document.getElementById("race").value
-    if(nom.includes(',')){
+    var race = document.getElementById("race").value
+    if(race.includes(',')){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
         messageErreur.textContent = "ATTENTION ! La race contient une virgule.";
-        fname.disabled = nom.includes(',');
+        fname.disabled = race.includes(',');
     }else{
         messageErreur.style.display = "none";
-        fname.disabled = nom.includes(',');
+        fname.disabled = race.includes(',');
     }
 });
 
 var ageA = document.getElementById("age")
 ageA.addEventListener("input", function() {
-    var nom = document.getElementById("age").value
-    if(nom.includes(',')){
+    var age = document.getElementById("age").value
+    if(age.includes(',') || age < 0 || age > 30){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
-        messageErreur.textContent = "ATTENTION ! L'age contient une virgule.";
-        fname.disabled = nom.includes(',');
+        messageErreur.textContent = "ATTENTION ! L'age est invalide.";
+        fname.disabled = age.includes(',');
     }else{
         messageErreur.style.display = "none";
-        fname.disabled = nom.includes(',');
+        fname.disabled = age.includes(',');
     }
 });
 
 var courrielA = document.getElementById("courriel")
 courrielA.addEventListener("input", function() {
-    var nom = document.getElementById("courriel").value
-    if(nom.includes(',')){
+    var courriel = document.getElementById("courriel").value
+    if(courriel.includes(',') || !isValidEmail(email)){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
-        messageErreur.textContent = "ATTENTION ! Le courriel contient une virgule.";
-        fname.disabled = nom.includes(',');
+        messageErreur.textContent = "ATTENTION ! L'email est invalide.";
+        fname.disabled = courriel.includes(',');
     }else{
         messageErreur.style.display = "none";
-        fname.disabled = nom.includes(',');
+        fname.disabled = courriel.includes(',');
     }
 });
 
@@ -88,10 +88,10 @@ adresseA.addEventListener("input", function() {
 var cpA = document.getElementById("cp")
 cpA.addEventListener("input", function() {
     var nom = document.getElementById("cp").value
-    if(nom.includes(',')){
+    if(nom.includes(',') || !isValidCanadianPostalCode(postalCodeToCheck) ){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
-        messageErreur.textContent = "ATTENTION ! Le code postal contient une virgule.";
+        messageErreur.textContent = "ATTENTION ! Le code postal Invalide.";
         fname.disabled = nom.includes(',');
     }else{
         messageErreur.style.display = "none";
@@ -127,48 +127,42 @@ descriptionA.addEventListener("input", function() {
     }
 });
 
-/*function nombreDeCaractereNom() {
+
+
+var nbrCarNom = document.getElementById("nom")
+nbrCarNom.addEventListener("input", function() {
     var nom = document.getElementById("nom").value
     if(nom.length < 3 || nom.length > 20){
         messageErreur.style.display = "block";
+        messageErreur.style.color = "red";
         messageErreur.textContent = "ATTENTION ! Le nombre de caractère du nom est invalide (NB: min = 3, max = 20).";
-    }else
+        fname.disabled = true;
+    }else{
         messageErreur.style.display = "none";
-}
+        fname.disabled = false;
+    }
+});
 
-function maxAge() {
+var maxAge = document.getElementById("age")
+maxAge.addEventListener("input", function() {
     var age = document.getElementById("age").value
     if(age < 0 || age > 30){
         messageErreur.style.display = "block";
+        messageErreur.style.color = "red";
         messageErreur.textContent = "ATTENTION ! L'age est invalide (NB: min = 0, max = 30).";
-    }else
+        fname.disabled = true;
+    }else{
         messageErreur.style.display = "none";
-}
+        fname.disabled = false;
+    }
+});
 
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-function adresseCourrrielValide() {
-    var email = document.getElementById("courriel").value 
-    if(!isValidEmail(email)){
-        messageErreur.style.display = "block";
-        messageErreur.textContent = "ATTENTION ! L'email est invalide.";
-    }else
-        messageErreur.style.display = "none";
-}
-
 function isValidCanadianPostalCode(postalCode) {
     const postalCodeRegex = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
     return (postalCodeRegex.test(postalCode) && postalCode.length == 7);
 }
-
-function verifieCodePostal() {
-    postalCodeToCheck = document.getElementById("cp").value
-    if (!isValidCanadianPostalCode(postalCodeToCheck)) {
-        messageErreur.style.display = "block";
-        messageErreur.textContent = "ATTENTION ! Le code postal est invalide.";
-    }else
-        messageErreur.style.display = "none";
-}*/
