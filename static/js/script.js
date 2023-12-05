@@ -60,7 +60,7 @@ ageA.addEventListener("input", function() {
 var courrielA = document.getElementById("courriel")
 courrielA.addEventListener("input", function() {
     var courriel = document.getElementById("courriel").value
-    if(courriel.includes(',') || !isValidEmail(email)){
+    if(courriel.includes(',') || !isValidEmail(courriel)){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
         messageErreur.textContent = "ATTENTION ! L'email est invalide.";
@@ -88,7 +88,7 @@ adresseA.addEventListener("input", function() {
 var cpA = document.getElementById("cp")
 cpA.addEventListener("input", function() {
     var nom = document.getElementById("cp").value
-    if(nom.includes(',') || !isValidCanadianPostalCode(postalCodeToCheck) ){
+    if(nom.includes(',') || !isValidCanadianPostalCode(nom) ){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
         messageErreur.textContent = "ATTENTION ! Le code postal Invalide.";
