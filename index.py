@@ -40,7 +40,7 @@ def close_connection(exception):
 def recherche_animaux():
     espece_recherchee = request.form.get('search')
     data = get_db()
-    animaux_recherches = data.get_animaux_by_espece(espece_recherchee)
+    animaux_recherches = data.search_animaux(espece_recherchee)
     return render_template('resultats_recherche.html', animaux=animaux_recherches)
 
 
