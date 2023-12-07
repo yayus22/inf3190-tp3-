@@ -87,7 +87,7 @@ class Database:
             "race LIKE ? OR "
             "description LIKE ?"
         )
-        cursor.execute(search_query, ('%' + query + '%',) * 4)  # Utilisation de LIKE pour les correspondances partielles
+        cursor.execute(search_query, ('%' + query + '%',) * 4) 
         all_data = cursor.fetchall()
         return [_build_animal(item) for item in all_data]
 

@@ -15,7 +15,8 @@
 import random
 import re
 from flask import Flask, abort
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request 
+from flask import redirect, url_for, flash
 from flask import g
 from .database import Database
 
