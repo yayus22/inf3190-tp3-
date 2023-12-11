@@ -87,15 +87,15 @@ adresseA.addEventListener("input", function() {
 
 var cpA = document.getElementById("cp")
 cpA.addEventListener("input", function() {
-    var nom = document.getElementById("cp").value
-    if(nom.includes(',') || !isValidCanadianPostalCode(nom) ){
+    var code = document.getElementById("cp").value
+    if(code.includes(',') || !isValidCanadianPostalCode(code) ){
         messageErreur.style.display = "block";
         messageErreur.style.color = "red";
         messageErreur.textContent = "ATTENTION ! Le code postal Invalide.";
-        fname.disabled = nom.includes(',');
+        fname.disabled = code.includes(',');
     }else{
         messageErreur.style.display = "none";
-        fname.disabled = nom.includes(',');
+        fname.disabled = code.includes(',');
     }
 });
 
@@ -164,5 +164,7 @@ function isValidEmail(email) {
 
 function isValidCanadianPostalCode(postalCode) {
     const postalCodeRegex = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
-    return (postalCodeRegex.test(postalCode) && postalCode.length == 7);
+    const postalCodeRegex2 = /^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/;
+    return (postalCodeRegex.test(postalCode) && postalCode.length == 7 ||
+            postalCodeRegex2.test(postalCode) && postalCode.length == 6);
 }
